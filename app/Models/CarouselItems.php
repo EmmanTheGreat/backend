@@ -21,7 +21,7 @@ class CarouselItems extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'carousel_item_id';
+    protected $primaryKey = 'carousel_items_id';
 
     /**
      * The attributes that are mass assignable.
@@ -29,10 +29,12 @@ class CarouselItems extends Model
      * @var array
      */
     protected $fillable = [
+        
         'carousel_name',
         'description',
         'image_path',
         'user_id'
+
     ];
 
 }
