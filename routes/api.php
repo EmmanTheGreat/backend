@@ -35,8 +35,17 @@ Route::post('/carousel', [CarouselItemsController::class, 'store']
 Route::put('/carousel/{id}', [CarouselItemsController::class, 'update']
 );
 
+
+
 Route::get('/user', [UserController::class, 'index']
 );
 
 Route::delete('/user/{id}', [UserController::class, 'destroy']
 );
+
+Route::post('/user', [UserController::class, 'store']
+);
+
+Route::get('/user/{id}', [UserController::class, 'show']
+);
+
