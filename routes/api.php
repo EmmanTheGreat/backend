@@ -44,8 +44,16 @@ Route::delete('/user/{id}', [UserController::class, 'destroy']
 );
 
 Route::post('/user', [UserController::class, 'store']
-);
+)->name('user.store');
 
 Route::get('/user/{id}', [UserController::class, 'show']
 );
 
+Route::put('/user/{id}', [UserController::class, 'update']
+)->name('user.update');
+
+Route::put('/user/email/{id}', [UserController::class, 'email']
+)->name('user.email');
+
+Route::put('/user/password/{id}', [UserController::class, 'password']
+)->name('user.password');
