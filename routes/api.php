@@ -17,45 +17,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('/login',   'login')->name('user.login');;
-    Route::post('/logout',  'logout')->name('user.logout');;
+
+//Public API
+Route::post('/login',  [AuthController::class,'login'])->name('user.login');;
+Route::post('/user',   [UserController::class,'store'])->name('user.store');
+    
+
+
+//Private API
+Route::middleware(['auth:sanctum', ])->group(function () {
+
+    Route::post('/logout',  [AuthController::class,'logout'])->name('user.logout');;
+
+    Route::controller(CarouselItemsController::class)->group(function () {
+        Route::get('/carousel',         'index');
+        Route::get('/carousel/{id}',    'show');
+        Route::delete('/carousel/{id}', 'destroy');
+        Route::post('/carousel',        'store');
+        Route::put('/carousel/{id}',    'update');
+    });
+
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user',                 'index');
+        Route::delete('/user/{id}',         'destroy'); 
+        Route::get('/user/{id}',            'show');
+        Route::put('/user/{id}',            'update')->name('user.update');
+        Route::put('/user/email/{id}',      'email')->name('user.email');
+        Route::put('/user/password/{id}',   'password')->name('user.password');
+    });
+
+  
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
-Route::controller(CarouselItemsController::class)->group(function () {
-    Route::get('/carousel',         'index');
-    Route::get('/carousel/{id}',    'show');
-    Route::delete('/carousel/{id}', 'destroy');
-    Route::post('/carousel',        'store');
-    Route::put('/carousel/{id}',    'update');
-});
 
 
 
 
 
-// Route::get('/user', [UserController::class, 'index']
-// );
 
-// Route::delete('/user/{id}', [UserController::class, 'destroy']
-// );
 
-// Route::post('/user', [UserController::class, 'store']
-// )->name('user.store');
-
-// Route::get('/user/{id}', [UserController::class, 'show']
-// );
-
-// Route::put('/user/{id}', [UserController::class, 'update']
-// )->name('user.update');
-
-// Route::put('/user/email/{id}', [UserController::class, 'email']
-// )->name('user.email');
-
-// Route::put('/user/password/{id}', [UserController::class, 'password']
-// )->name('user.password');
