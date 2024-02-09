@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AiController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CarouselItemsController;
 use App\Http\Controllers\Api\ProfileController;
@@ -22,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 //Public API
 Route::post('/login',  [AuthController::class,'login'])->name('user.login');;
 Route::post('/user',   [UserController::class,'store'])->name('user.store');
+
+//OCR API
+Route::post('/ocr',  [AiController::class,'ocr'])->name('ocr.image');
     
 
 
